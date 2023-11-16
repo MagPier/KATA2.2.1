@@ -1,10 +1,7 @@
 package hiber.model;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Primary;
-import org.springframework.context.annotation.Scope;
-import org.springframework.stereotype.Component;
 
+import org.springframework.context.annotation.Scope;
 import javax.persistence.*;
 
 @Entity
