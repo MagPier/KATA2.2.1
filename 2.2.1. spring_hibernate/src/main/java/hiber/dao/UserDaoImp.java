@@ -28,19 +28,15 @@ public class UserDaoImp implements UserDao {
 
     @Override
     public List<User> listUsers() {
-        Session session = sessionFactory.getCurrentSession();
-        CriteriaBuilder cb = sessionFactory.getCriteriaBuilder();
-        CriteriaQuery<User> criteriaQuery = cb.createQuery(User.class);
-        Root<User> root = criteriaQuery.from(User.class);
-        criteriaQuery.select(root);
-        Query query = session.createQuery(criteriaQuery);
+        String hql = "from User";
+        TypedQuery<User> query = sessionFactory.getCurrentSession().createQuery(hql, User.class);
         return query.getResultList();
     }
 
     @Override
     public User getUserByCar(String model, int series) {
         String hql = "from User user where user.car.model = :model and user.car.series = :series";
-        TypedQuery<User> query = sessionFactory.getCurrentSession().createQuery(hql);
+        TypedQuery<User> query = sessionFactory.getCurrentSession().createQuery(hql, User.class);
         query.setParameter("model", model)
                 .setParameter("series", series);
         return query.setMaxResults(1).getSingleResult();
